@@ -1,15 +1,18 @@
-// Lista de flashcards
+// =============================
+// FLASHCARDS - COPA DO MUNDO
+// =============================
+
 const flashcards = [
     {
         pergunta: "Quem é o único jogador tricampeão mundial?",
-        resposta: "Pelé venceu as Copas do Mundo de 1958, 1962 e 1970."
+        resposta: "Pelé conquistou as Copas do Mundo de 1958, 1962 e 1970."
     },
     {
         pergunta: "Quem foi o melhor jogador da Copa do Mundo de 2022?",
         resposta: "Lionel Messi."
     },
     {
-        pergunta: "Quem foi o artilheiro da Copa de 2002?",
+        pergunta: "Quem foi o artilheiro da Copa do Mundo de 2002?",
         resposta: "Ronaldo Fenômeno marcou 8 gols."
     },
     {
@@ -17,11 +20,11 @@ const flashcards = [
         resposta: "Kylian Mbappé."
     },
     {
-        pergunta: "Quem é o maior artilheiro da história das Copas do Mundo?",
+        pergunta: "Quem é o maior artilheiro da história das Copas?",
         resposta: "Miroslav Klose, com 16 gols."
     },
     {
-        pergunta: "Qual goleiro foi destaque da Argentina na Copa de 2022?",
+        pergunta: "Qual goleiro foi destaque da Argentina em 2022?",
         resposta: "Emiliano Martínez."
     },
     {
@@ -29,11 +32,11 @@ const flashcards = [
         resposta: "Cafu."
     },
     {
-        pergunta: "Qual jogador português é um dos maiores ídolos da seleção de Portugal?",
+        pergunta: "Qual jogador português é um dos maiores ídolos da seleção?",
         resposta: "Cristiano Ronaldo."
     },
     {
-        pergunta: "Qual jogador brasileiro é conhecido como 'Fenômeno'?",
+        pergunta: "Qual jogador brasileiro é conhecido como Fenômeno?",
         resposta: "Ronaldo Nazário."
     },
     {
@@ -42,52 +45,37 @@ const flashcards = [
     }
 ];
 
-let indice = 0;
-let mostrandoResposta = false;
+// Seleciona a div onde os cards serão criados
+const container = document.getElementById("cards");
 
-// Elementos da página
-const card = document.getElementById("card");
-const contador = document.getElementById("contador");
+// Cria todos os flashcards
+flashcards.forEach((flashcard) => {
 
-// Exibe a pergunta
-function mostrarPergunta() {
-    card.textContent = flashcards[indice].pergunta;
-    mostrandoResposta = false;
-    contador.textContent = `Flashcard ${indice + 1} de ${flashcards.length}`;
-}
+    // Card
+    const card = document.createElement("div");
+    card.className = "card";
 
-// Vira o card
-function virarCard() {
-    if (mostrandoResposta) {
-        card.textContent = flashcards[indice].pergunta;
-    } else {
-        card.textContent = flashcards[indice].resposta;
-    }
+    // Conteúdo interno
+    card.innerHTML = `
+        <div class="conteudo">
+            <div class="frente">
+                <h3>Pergunta</h3>
+                <p>${flashcard.pergunta}</p>
+            </div>
 
-    mostrandoResposta = !mostrandoResposta;
-}
+            <div class="verso">
+                <h3>Resposta</h3>
+                <p>${flashcard.resposta}</p>
+            </div>
+        </div>
+    `;
 
-// Próximo flashcard
-function proximo() {
-    indice++;
+    // Virar o card
+    card.addEventListener("click", () => {
+        card.classList.toggle("virado");
+    });
 
-    if (indice >= flashcards.length) {
-        indice = 0;
-    }
+    // Adiciona o card na página
+    container.appendChild(card);
 
-    mostrarPergunta();
-}
-
-// Flashcard anterior
-function anterior() {
-    indice--;
-
-    if (indice < 0) {
-        indice = flashcards.length - 1;
-    }
-
-    mostrarPergunta();
-}
-
-// Inicia o primeiro flashcard
-mostrarPergunta();
+});
