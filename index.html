@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcards - Copa do Mundo</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:linear-gradient(135deg,#009c3b,#ffdf00);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+    }
+
+    .container{
+      width:90%;
+      max-width:600px;
+      text-align:center;
+    }
+
+    h1{
+      color:#fff;
+      margin-bottom:20px;
+    }
+
+    .card{
+      background:#fff;
+      border-radius:15px;
+      padding:40px;
+      min-height:250px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      box-shadow:0 10px 25px rgba(0,0,0,.3);
+      cursor:pointer;
+      transition:.4s;
+      font-size:22px;
+      font-weight:bold;
+    }
+
+    .card:hover{
+      transform:scale(1.03);
+    }
+
+    .botoes{
+      margin-top:20px;
+    }
+
+    button{
+      padding:12px 20px;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      background:#0066cc;
+      color:#fff;
+      font-size:16px;
+      margin:5px;
+      transition:.3s;
+    }
+
+    button:hover{
+      background:#004c99;
+    }
+
+    p{
+      color:#fff;
+      margin-top:15px;
+      font-size:18px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>⚽ Flashcards - Copa do Mundo</h1>
+
+  <div class="card" onclick="virarCard()" id="card">
+    Clique para ver a resposta
+  </div>
+
+  <div class="botoes">
+    <button onclick="anterior()">⬅ Anterior</button>
+    <button onclick="proximo()">Próximo ➡</button>
+  </div>
+
+  <p id="contador"></p>
+
+</div>
+
+<script>
+
+const flashcards = [
+
+{
+pergunta:"Quem é o único jogador tricampeão mundial?",
+resposta:"Pelé venceu as Copas de 1958, 1962 e 1970."
+},
+
+{
+pergunta:"Quem foi o melhor jogador da Copa do Mundo de 2022?",
+resposta:"Lionel Messi."
+},
+
+{
+pergunta:"Quem foi o artilheiro da Copa de 2002?",
+resposta:"Ronaldo Fenômeno marcou 8 gols."
+},
+
+{
+pergunta:"Quem marcou três gols na final da Copa de 2022?",
+resposta:"Kylian Mbappé."
+},
+
+{
+pergunta:"Quem é o maior artilheiro da história das Copas?",
+resposta:"Miroslav Klose, com 16 gols."
+},
+
+{
+pergunta:"Qual goleiro foi destaque da Argentina em 2022?",
+resposta:"Emiliano Martínez."
+},
+
+{
+pergunta:"Quem foi o capitão do Brasil no título de 2002?",
+resposta:"Cafu."
+},
+
+{
+pergunta:"Qual jogador português é um dos maiores ídolos da seleção?",
+resposta:"Cristiano Ronaldo."
+},
+
+{
+pergunta:"Qual brasileiro é conhecido como Fenômeno?",
+resposta:"Ronaldo Nazário."
+},
+
+{
+pergunta:"Qual jogador brasileiro disputou as Copas de 2014, 2018 e 2022?",
+resposta:"Neymar Jr."
+}
+
+];
+
+let indice = 0;
+let mostrandoResposta = false;
+
+const card = document.getElementById("card");
+const contador = document.getElementById("contador");
+
+function mostrarPergunta(){
+    card.innerHTML = flashcards[indice].pergunta;
+    mostrandoResposta = false;
+    contador.innerHTML = `Flashcard ${indice+1} de ${flashcards.length}`;
+}
+
+function virarCard(){
+
+    if(!mostrandoResposta){
+        card.innerHTML = flashcards[indice].resposta;
+        mostrandoResposta = true;
+    }else{
+        card.innerHTML = flashcards[indice].pergunta;
+        mostrandoResposta = false;
+    }
+
+}
+
+function proximo(){
+
+    indice++;
+
+    if(indice >= flashcards.length){
+        indice = 0;
+    }
+
+    mostrarPergunta();
+
+}
+
+function anterior(){
+
+    indice--;
+
+    if(indice < 0){
+        indice = flashcards.length-1;
+    }
+
+    mostrarPergunta();
+
+}
+
+mostrarPergunta();
+
+</script>
+
+</body>
+</html>
